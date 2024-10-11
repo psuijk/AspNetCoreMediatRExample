@@ -1,0 +1,20 @@
+﻿@page
+@model DeleteModel
+@{
+
+    ViewData["Title"] = "Delete Address Book Entry";
+}
+
+<h1>Confirm Deletion</h1>
+<p>Are you sure you want to delete the entry for:</p>
+<p>
+    @Model.Entry.Line1<br />
+    @Html.Raw(!string.IsNullOrEmpty(Model.Entry.Line2) ? Model.Entry.Line2 + "<br />" : "")
+    @Model.Entry.City, @Model.Entry.State @Model.Entry.PostalCode
+</p>
+
+<form method="post">
+    <input type="hidden" name="id" value="@Model.Entry.Id" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-page="Index" class="btn btn-secondary">Cancel</a>
+</form>
