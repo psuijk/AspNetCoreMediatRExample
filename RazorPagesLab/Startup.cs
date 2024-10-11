@@ -20,8 +20,11 @@ public class Startup
 	public void ConfigureServices(IServiceCollection services)
 	{
 		services.AddRazorPages();
-		services.AddMediatR(typeof(Startup).Assembly);
-		services.AddSingleton(typeof(IRepo<>), typeof(Repository<>));
+        services.AddMediatR(cfg => {
+            cfg.RegisterServicesFromAssembly(typeof(Startup).Assembly);
+        });
+
+        services.AddSingleton(typeof(IRepo<>), typeof(Repository<>));
 	}
 
 	// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
